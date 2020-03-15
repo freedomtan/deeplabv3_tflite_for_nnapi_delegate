@@ -42,17 +42,39 @@ How to fix it: 1. Do something like `--disable_nnapi_cpu=1` or `--nnapi_accelera
 ## Generating pb files / exporting files:
 ### 513x513, OS = 8, quant:
 ```
-PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_513_os8_quant.pb --model_variant="mobilenet_v2" --quantize_delay_step=0
+PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py \
+  --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt \
+  --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_513_os8_quant.pb \
+  --model_variant="mobilenet_v2" \
+  --quantize_delay_step=0
 ```
 ### 513x513, OS =16, quant: 
 ```
-PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_513_os16_quant.pb --model_variant="mobilenet_v2" --quantize_delay_step=0 --output_stride=16
+PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py\
+  --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt \
+  --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_513_os16_quant.pb \
+  --model_variant="mobilenet_v2" \
+  --quantize_delay_step=0 \
+  --output_stride=16
 ```
 ### 257x257, OS = 8, quant:  
 ```
-PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_257_os8_quant.pb --model_variant="mobilenet_v2" --quantize_delay_step=0 --crop_size=257 --crop_size=257
+PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py \
+  --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt \
+  --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_257_os8_quant.pb \
+  --model_variant="mobilenet_v2" \
+  --quantize_delay_step=0 \
+  --crop_size=257 \ 
+  --crop_size=257
 ```
 ### 513x513, OS =16, quant: 
 ```
-PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_257_os16_quant.pb --model_variant="mobilenet_v2" --quantize_delay_step=0 --crop_size=257 --crop_size=257 --output_stride=16
+PYTHONPATH=`pwd`:`pwd`/slim python deeplab/export_model.py \
+  --checkpoint_path=/tmp/deeplabv3_mnv2_pascal_train_aug_8bit/model.ckpt \
+  --export_path=/tmp/deeplab_export/deeplabv3_mnv2_pascal_257_os16_quant.pb \
+  --model_variant="mobilenet_v2" \
+  --quantize_delay_step=0 \
+  --crop_size=257 \
+  --crop_size=257 \
+  --output_stride=16
 ```
