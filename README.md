@@ -28,16 +28,14 @@ Operator-wise Profiling Info for Regular Benchmark Runs:
 |[deeplabv3_mnv2_ade20k_513_os8_quant](ade20k/deeplabv3_mnv2_ade20k_513_os8_dummy_quant.tflite)| ade20k | 513x513 | 8 | dummy quant |
 |[deeplabv3_mnv2_ade20k_513_os16_quant](ade20k/deeplabv3_mnv2_ade20k_513_os16_dummy_quant.tflite)| ade20k | 513x513 | 16 | dummy quant |
 
+Note that "dummy quant" ones are generated using [dummy-quantization](https://tensorflow.google.cn/lite/convert/cmdline_examples#use_dummy-quantization_to_try_out_quantized_inference_on_a_float_graph_).
 
 ## How to get fully delegatable .tflite. Why?
-TFLite models from Google, such as those in [mobilenetv2_coco_voc_trainaug_8bit](http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_train_aug_8bit_2019_04_26.tar.gz), are from MobilenetV2 input to ArgMax. However, there are 3 types of ops preventing them from fully delegated to NNAPI.
+TFLite models from Google, such as those in [mobilenetv2_coco_voc_trainaug_8bit](http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_train_aug_8bit_2019_04_26.tar.gz), are from MobilenetV2 input to ArgMax. As we noted above, there are 3 types of ops preventing them from been fully delegated to NNAPI.
 
-### Resize_bilinear: align_corners not supported by NNAPI
-How to fix it: change to False in python source code. 
-### Argmax: output_type=int64, which is default value
-How to fix it: change it to int32 in source.
-### Average_pool_2d: filter H*W > 256
-How to fix it: 1. Do something like `--disable_nnapi_cpu=1` or `--nnapi_accelerator_name=neuron-ann` in benchmark_model. 2. Simply skip the constraint in NNAPI delegate source code.
+1. Resize_bilinear: align_corners not supported by NNAPI. How to fix it: change to False in python source code. 
+2. Argmax: output_type=int64, which is default value. How to fix it: change it to int32 in source.
+3. Average_pool_2d: filter H*W > 256. How to fix it: 1. Do something like `--disable_nnapi_cpu=1` or `--nnapi_accelerator_name=neuron-ann` in benchmark_model. 2. Simply skip the constraint in NNAPI delegate source code.
 
 ## Generating pb files / exporting files:
 ### 513x513, OS = 8, quant:
