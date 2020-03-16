@@ -1,5 +1,5 @@
 # deeplabv3_tflite_for_nnapi_delegate
-DeepLab V3 TFLite models that be fully delegated to NNAPI.
+DeepLab V3 TFLite models that can be fully delegated to NNAPI.
 
 When running `./benchmark_model --graph=frozen_inference_graph.tflite --use_nnapi=1`, where the `frozen_inference_graph.tflite` is from the [quantized model](http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_train_aug_8bit_2019_04_26.tar.gz) by Google. We can see that the graph is divided into 8 nodes, becasue `AVERAGE_POOL_2D`, `RESIZE_BILINEAR`, and `ARG_MAX` cannot be delegated.
 
